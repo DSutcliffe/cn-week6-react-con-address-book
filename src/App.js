@@ -1,26 +1,48 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react'
+import './css/App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+
+  state = {
+    inputValue: "",
+    phoneNumber: []
+  }
+
+  updateInput = (e) => {
+    this.setState({
+      inputValue: e.target.value
+    })
+  }
+
+  storeNumber = () => {
+    let joined = this.state.phoneNumber.concat(this.state.inputValue)
+    this.setState({
+      phoneNumber: joined
+    })
+  }
+
+  render() {
+    console.log(this.state)
+    // const items = this.state.phoneNumber.map(item => <li>{item}</li> );
+    const items = this.state.phoneNumber.map(item => <h3>{item}</h3> );
+
+    return (
+      <div>
+        <h1>Address Book</h1>
+        <input type="text" onChange={this.updateInput}/>
+        <button onClick={this.storeNumber}>Store Number</button>
+
+        {/* <h3>{this.state.phoneNumber}</h3> */}
+        
+        {items}
+
+        {/* <ul>
+          {items}
+        </ul> */}
+
+      </div>
+    )
+  }
 }
 
 export default App;
